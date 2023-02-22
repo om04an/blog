@@ -23,11 +23,13 @@
                 </form>
             </div>
             {% if request.user.is_authenticated %}
-            AUTHED
+                <a href="#" class="profile_photo">
+                    <img src="{{ data_user.profile_photo }}" alt="">
+                </a>
             {% else %}
-            <div class="auth">
-                <a href="login/" class="login">Login</a>
-            </div>
+                <div class="auth">
+                    <a href="login/" class="login">Login</a>
+                </div>
             {% endif %}
         </nav>
     </div>
