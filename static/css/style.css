@@ -99,8 +99,9 @@ ul {
 .avatar{
     width: 50px;
     height: 50px;
-    border-radius: 25px;
     margin-right: 18px;
+    border-radius: 30px;
+    border: 2px solid #444C56;
 }
 
 .total-info{
@@ -135,6 +136,8 @@ ul {
     line-height: 140%;
     color: #C1CEDA;
     margin: 13px 0 0;
+    max-height: 250px;
+    overflow: hidden;
 }
 
 .post + .delimiter{
