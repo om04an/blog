@@ -19,6 +19,8 @@ class Post(models.Model):
     text = models.TextField()
     date_create = models.DateField(auto_now_add=True)
     number_of_likes = models.IntegerField(default=0)
+    number_of_comments = models.IntegerField(default=0)
+    
 
     def __str__(self):
         return self.title

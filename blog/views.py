@@ -8,7 +8,8 @@ def home(request):
         data_user = _getting_user_data(request)
     posts = Post.objects.all()
     comments = Comment.objects.all()
-    update_users()
+    _update_the_number_of_likes_and_user_posts()
+    _update_post_comment_count()
 
     return render(request, 'index.html', {'data_user': data_user,
                                           'posts': posts,
@@ -28,10 +29,18 @@ def _getting_user_data(request):
     return data_user
 
 
-def update_users():
+def _update_the_number_of_likes_and_user_posts():
     users = Profile.objects.all()
 
     for user in users:
         user.number_of_posts = len(Post.objects.filter(user_id=user.id))
         user.number_of_comments = len(Comment.objects.filter(commenter_id=user.id))
         user.save()
+
+
+def _update_post_comment_count():
+    posts = Post.objects.all()
+
+    for post in posts:
+        post.number_of_comments = len(Comment.objects.filter(post_id=post.id))
+        post.save()
