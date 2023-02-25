@@ -6,8 +6,19 @@ def home(request):
     data_user = ''
     if request.user.is_authenticated:
         data_user = _getting_user_data(request)
-    posts = Post.objects.all()
+
+    query_dict = request.GET  # This is a dict
+    query = query_dict.get('post')
+
+    if query:
+        if Post.objects.filter(title__contains=query):
+            posts = Post.objects.filter(title__contains=query)
+        else:
+            posts = Post.objects.filter(text__contains=query)
+    else:
+        posts = Post.objects.all()
     comments = Comment.objects.all()
+
     _update_the_number_of_likes_and_user_posts()
     _update_post_comment_count()
 

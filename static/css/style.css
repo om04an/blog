@@ -91,6 +91,10 @@ ul {
     border: 2px solid #444C56;
 }
 
+.posts{
+    margin-bottom: 50px;
+}
+
 .post{
     list-style-type: none;
     display: flex;
