@@ -48,7 +48,11 @@
                             <a href="#" class="total-info-item nickname">{{ post.user }}</a>
                             <li class="total-info-item">{{ post.date_create }}</li>
                             <li class="total-info-item">🤍 {{ post.number_of_likes }}</li>
-                            <a href="#" class="total-info-item">( 5 comments )</a>
+                            <a href="#" class="total-info-item">( {% for comment in comments %}
+                                                                    {% if comment.post_id == post.id %}
+                                                                        666
+                                                                    {% endif %}
+                                                                  {% endfor %} comments )</a>
                         </ul>
                         <a href="#" class="title-post">{{ post.title }}</a>
                         <p class="text-post">{{ post.text }}</p>

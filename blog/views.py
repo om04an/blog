@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import User, Profile, Post
+from .models import User, Profile, Post, Comment
 
 
 def home(request):
@@ -7,9 +7,12 @@ def home(request):
     if request.user.is_authenticated:
         data_user = _getting_user_data(request)
     posts = Post.objects.all()
+    comments = Comment.objects.all()
+    update_users()
 
     return render(request, 'index.html', {'data_user': data_user,
                                           'posts': posts,
+                                          'comments': comments,
                                           })
 
 
@@ -23,3 +26,12 @@ def _getting_user_data(request):
     data_user = Profile.objects.get(user=nickname)
 
     return data_user
+
+
+def update_users():
+    users = Profile.objects.all()
+
+    for user in users:
+        user.number_of_posts = len(Post.objects.filter(user_id=user.id))
+        user.number_of_comments = len(Comment.objects.filter(commenter_id=user.id))
+        user.save()
