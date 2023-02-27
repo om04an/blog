@@ -11,11 +11,10 @@ def post(request, post_id):
     post = Post.objects.get(id=post_id)
     comments = Comment.objects.filter(post_id=post_id)
     users = User.objects.all()
-    
 
     return render(request, 'post.html', {'post':post,
                                          'data_user': data_user,
-                                         'comments': comments,
+                                         'comments': comments[::-1],
                                          'users': users,
                                          })
 
@@ -30,3 +29,18 @@ def _getting_user_data(request):
     data_user = Profile.objects.get(user=nickname)
 
     return data_user
+
+
+def comment(request):
+    data = request.POST
+
+    if data.get('text'):
+        commenter = Profile.objects.get(user=request.user)
+        post = Post.objects.get(id=data.get('post_id'))
+
+        comment = Comment()
+        comment.text = data.get('text')
+        comment.commenter = commenter
+        comment.post = post
+        comment.save()
+    return redirect('/')

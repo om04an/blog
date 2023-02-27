@@ -189,3 +189,8 @@ ul {
 .list-comments{
     margin-top: 18px;
 }
+
+.post_id,
+.commenter_id{
+    display: none;
+}

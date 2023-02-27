@@ -30,7 +30,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     commenter = models.ForeignKey(Profile, on_delete=models.CASCADE)
     text = models.TextField()
-    date_create = models.DateField(auto_now_add=True)
+    date_create = models.DateField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.text
