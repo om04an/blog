@@ -1,10 +1,17 @@
 from django.shortcuts import render, redirect
 from blog.models import User, Profile, Post, Comment
+from blog.views import home, post_search
 
 
 # Create your views here.
 def post(request, post_id):
     data_user = ''
+
+    query_dict = request.GET    # This is a dict
+    query = query_dict.get('post')      # user request
+    if query:
+        return home(request)
+
     if request.user.is_authenticated:       # checking if the user is authorized
         data_user = _getting_user_data(request)
 
@@ -43,4 +50,4 @@ def comment(request):
         comment.commenter = commenter
         comment.post = post
         comment.save()
-    return redirect('/')
+    return redirect(f'/post/{data.get("post_id")}/')

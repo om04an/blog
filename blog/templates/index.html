@@ -18,17 +18,17 @@
     <div class="container">
         <nav class="nav">
             <a href="/">
-                <img src="static/images/logo.png" alt="logo" class="logo">
+                <img src="/static/images/logo.png" alt="logo" class="logo">
             </a>
             <div class="search">
-                <img src="static/images/search-logo.svg" alt="search-logo" class="search-img">
+                <img src="/static/images/search-logo.svg" alt="search-logo" class="search-img">
                 <form action="" method="GET" name="post" autocomplete="off">
                     <input type="text" placeholder="Search" name="post" class="search-form">
                 </form>
             </div>
             {% if request.user.is_authenticated %}
                 <a href="#" class="profile_photo">
-                    <img src="{{ data_user.profile_photo }}" alt="">
+                    <img src="/{{ data_user.profile_photo }}" alt="">
                 </a>
             {% else %}
                 <div class="auth">
@@ -45,7 +45,7 @@
                 <li class="delimiter"></li>
                 <li class="post">
                     <a href="#">
-                        <img src="{{ post.user.profile_photo }}" alt="avatar" class="avatar">
+                        <img src="/{{ post.user.profile_photo }}" alt="avatar" class="avatar">
                     </a>
                     <div class="data-post">
                         <ul class="total-info">

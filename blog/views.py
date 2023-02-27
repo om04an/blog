@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import User, Profile, Post, Comment
 
 
@@ -7,23 +7,24 @@ def home(request):
     if request.user.is_authenticated:       # checking if the user is authorized
         data_user = _getting_user_data(request)
 
-    posts = _post_search(request)    
+    posts = post_search(request)    
     comments = Comment.objects.all()
 
     _updating_post_and_user_data()
 
-    return render(request, 'index.html', {'data_user': data_user,
+    render_page = render(request, 'index.html', {'data_user': data_user,
                                           'posts': posts,
                                           'comments': comments,
                                           })
 
+    return render_page
 
 def _updating_post_and_user_data():
     _update_the_number_of_likes_and_user_posts()
     _update_post_comment_count()
 
 
-def _post_search(request):
+def post_search(request):
     query_dict = request.GET    # This is a dict
     query = query_dict.get('post')      # user request
 
