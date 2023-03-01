@@ -1,8 +1,21 @@
 from django.shortcuts import render, redirect
 from .models import User, Profile, Post, Comment
+from django.contrib.auth.forms import UserCreationForm
+
+
 
 
 def home(request):
+
+    form = UserCreationForm()
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+        return redirect('/')
+
     data_user = ''
     if request.user.is_authenticated:       # checking if the user is authorized
         data_user = _getting_user_data(request)
@@ -12,10 +25,13 @@ def home(request):
 
     _updating_post_and_user_data()
 
-    render_page = render(request, 'index.html', {'data_user': data_user,
-                                          'posts': posts,
-                                          'comments': comments,
-                                          })
+    context = {'data_user': data_user,
+               'posts': posts,
+               'comments': comments,
+               'form': form,
+               }
+
+    render_page = render(request, 'index.html', context)
 
     return render_page
 
