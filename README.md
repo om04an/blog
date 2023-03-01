@@ -1,4 +1,4 @@
-# blog
+# Blog
 
 Blog site, with comments, likes and authentication.
 
