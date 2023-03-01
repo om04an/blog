@@ -1,2 +1,3 @@
 # blog
-The site is under development. Information about it will be updated as work progresses.
+
+[! This images](https://github.com/om04an/blog/blob/main/site.png)
